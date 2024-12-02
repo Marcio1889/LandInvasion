@@ -1,2 +1,18 @@
+
+
+#C
+COLOR_ORANGE = (255, 128, 0)
+COLOR_WHITE = (255, 255, 255)
+COLOR_YELLOW = (255, 255, 0)
+
+#M
+MENU_OPTION = ('NEW GAME',
+               'SCORE',
+               'QUIT GAME'
+
+)
+
+
+#W
 WIND_WIDTH = 800
 WIND_HEIGHT = 450
