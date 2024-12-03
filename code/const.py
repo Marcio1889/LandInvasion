@@ -8,9 +8,7 @@ COLOR_YELLOW = (255, 255, 0)
 #M
 MENU_OPTION = ('NEW GAME',
                'SCORE',
-               'QUIT GAME'
-
-)
+               'QUIT GAME')
 
 
 #W
