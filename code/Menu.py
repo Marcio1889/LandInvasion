@@ -9,7 +9,7 @@ from code.const import COLOR_ORANGE, MENU_OPTION, COLOR_WHITE, WIND_WIDTH, COLOR
 class Menu:
     def __init__(self, window):
         self.window = window
-        self.surf = pygame.image.load('./asset/Image.Menu.png')
+        self.surf = pygame.image.load('./asset/Image.Menu.png').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0) # Colocando a imagem dentro de um retangulo
 
 
