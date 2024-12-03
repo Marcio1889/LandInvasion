@@ -21,7 +21,7 @@ class Game:
 
             if menu_return == 'NEW GAME':
                 phase = Phase(self.window, 'Phase1', menu_return)
-                phase_return = phase.run()
+                phase.run()
             elif menu_return == 'SCORE':
                 pass
 

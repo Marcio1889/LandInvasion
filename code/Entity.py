@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 import pygame
 
 
@@ -14,3 +15,4 @@ class Entity(ABC):
     @abstractmethod
     def move(self):
         pass
+
