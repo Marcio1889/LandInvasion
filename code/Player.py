@@ -3,7 +3,8 @@ from email.policy import default
 import pygame
 
 from code.Entity import Entity
-from code.const import ENTITY_SPEED, WIND_WIDTH, WIND_HEIGHT
+from code.PlayerPower import PlayerPower
+from code.const import ENTITY_SPEED, WIND_WIDTH, WIND_HEIGHT, PLAYER_KEY_POWER, ENTITY_POWER_DELAY
 
 
 # class Player(Entity):
@@ -33,6 +34,7 @@ class Player(Entity):
             "right": pygame.image.load('./asset/Player_right.png').convert_alpha(),
             "default": pygame.image.load('./asset/player1.png').convert_alpha(),
         }
+        self.power_delay = ENTITY_POWER_DELAY[self.name]
 
     def move(self):
         pressed_key = pygame.key.get_pressed()
@@ -49,6 +51,14 @@ class Player(Entity):
             self.surf = self.images["right"]
         else:
             self.surf = self.images["default"]
+
+    def power(self):
+        self.power_delay -= 1
+        if self.power_delay == 0:
+            self.power_delay = ENTITY_POWER_DELAY[self.name]
+            pressed_key = pygame.key.get_pressed()
+            if pressed_key[PLAYER_KEY_POWER[self.name]]:
+                return PlayerPower(name=f'{self.name}Power', position=(self.rect.centerx, self.rect.centery))
 
 
 

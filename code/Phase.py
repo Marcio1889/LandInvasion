@@ -5,8 +5,10 @@ import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
+from code.Enemy import Enemy
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
+from code.Player import Player
 from code.const import COLOR_WHITE, WIND_HEIGHT, EVENT_ENEMY, SPAWN_TIME
 
 
@@ -35,6 +37,11 @@ class Phase:
 
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move()
+                if isinstance(ent, (Player, Enemy)):
+                    power = ent.power()
+                    if power is not None:
+                       self.entity_list.append(power)
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()

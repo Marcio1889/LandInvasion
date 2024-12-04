@@ -20,8 +20,11 @@ ENTITY_SPEED = {
     'ImageFP9': 5,
     'ImageFP10': 5,
     'Player1': 5,
-    'Enemy1': 3,
-    'Enemy2': 3,
+    'Player1Power': 3,
+    'Enemy1': 1,
+    'Enemy1Power': 4,
+    'Enemy2': 1,
+    'Enemy2Power': 2,
 
 }
 
@@ -38,8 +41,18 @@ ENTITY_HEALTH = {
     'ImageFP9': 999,
     'ImageFP10': 999,
     'Player1': 300,
+    'Player1Power': 1,
     'Enemy1': 50,
+    'Enemy1Power': 1,
     'Enemy2': 60,
+    'Enemy2Power': 1,
+
+}
+
+ENTITY_POWER_DELAY = {
+    'Player1': 20,
+    'Enemy1': 100,
+    'Enemy2': 200,
 
 }
 
@@ -49,6 +62,11 @@ EVENT_ENEMY = pygame.USEREVENT + 1
 MENU_OPTION = ('NEW GAME',
                'SCORE',
                'QUIT GAME')
+
+#P
+PLAYER_KEY_POWER = {'Player1': pygame.K_RCTRL
+
+}
 
 #S
 
