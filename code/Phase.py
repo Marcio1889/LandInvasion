@@ -6,6 +6,7 @@ from pygame import Surface, Rect
 from pygame.font import Font
 
 from code.EntityFactory import EntityFactory
+from code.EntityMediator import EntityMediator
 from code.const import COLOR_WHITE, WIND_HEIGHT, EVENT_ENEMY, SPAWN_TIME
 
 
@@ -27,7 +28,7 @@ class Phase:
         pygame.mixer_music.play(-1)
         clock = pygame.time.Clock()
         while True:
-            clock.tick(30) # Definindo a velocidade do jogo
+            clock.tick(50) # Definindo a velocidade do jogo
             for ent in self.entity_list:
                 if ent is None:
                     continue
@@ -43,10 +44,14 @@ class Phase:
                     self.entity_list.append(EntityFactory.get_entity(choice))
 
 
-            self.phase_text(18, f'{self.name} - Timeout: {self.timeout / 1000 :.1f}s', COLOR_WHITE, (10, 5))
-            self.phase_text(18, f'fps:{clock.get_fps() :.0f}', COLOR_WHITE, (10, WIND_HEIGHT - 35))
+            self.phase_text(18, f'{self.name}  -  Timeout: {self.timeout / 1000 :.1f}s', COLOR_WHITE, (10, 5))
+            self.phase_text(18, f'fps: {clock.get_fps() :.0f}', COLOR_WHITE, (10, WIND_HEIGHT - 35))
             self.phase_text(18, f'entidades: {len(self.entity_list)}', COLOR_WHITE, (10, WIND_HEIGHT - 20))
             pygame.display.flip()
+
+            # Verificando a colisão
+            EntityMediator.verify_collision(entity_list=self.entity_list)
+            EntityMediator.verify_health(entity_list=self.entity_list)
         pass
 
     def phase_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
