@@ -9,7 +9,7 @@ from code.Enemy import Enemy
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
 from code.Player import Player
-from code.const import COLOR_WHITE, WIND_HEIGHT, EVENT_ENEMY, SPAWN_TIME
+from code.const import COLOR_WHITE, WIND_HEIGHT, EVENT_ENEMY, SPAWN_TIME, COLOR_BLUE
 
 
 class Phase:
@@ -41,6 +41,9 @@ class Phase:
                     power = ent.power()
                     if power is not None:
                        self.entity_list.append(power)
+                if ent.name == 'Player1':
+                    self.phase_text(18, f'Player1  /  Health: {ent.health} / Score: {ent.score}',
+                                    COLOR_BLUE, (10, 25))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -51,7 +54,8 @@ class Phase:
                     self.entity_list.append(EntityFactory.get_entity(choice))
 
 
-            self.phase_text(18, f'{self.name}  -  Timeout: {self.timeout / 1000 :.1f}s', COLOR_WHITE, (10, 5))
+
+            self.phase_text(18, f'{self.name}  /  Timeout: {self.timeout / 1000 :.1f}s', COLOR_WHITE, (10, 5))
             self.phase_text(18, f'fps: {clock.get_fps() :.0f}', COLOR_WHITE, (10, WIND_HEIGHT - 35))
             self.phase_text(18, f'entidades: {len(self.entity_list)}', COLOR_WHITE, (10, WIND_HEIGHT - 20))
             pygame.display.flip()

@@ -4,27 +4,27 @@ import pygame
 COLOR_ORANGE = (255, 128, 0)
 COLOR_WHITE = (255, 255, 255)
 COLOR_YELLOW = (255, 255, 0)
+COLOR_BLUE = (0, 0, 255)
 
 #E
-
-ENTITY_SPEED = {
+ENTITY_DAMAGE = {
     'ImageFP0': 0,
     'ImageFP1': 0,
-    'ImageFP2': 1,
-    'ImageFP3': 2,
-    'ImageFP4': 3,
-    'ImageFP5': 4,
-    'ImageFP6': 5,
-    'ImageFP7': 5,
-    'ImageFP8': 5,
-    'ImageFP9': 5,
-    'ImageFP10': 5,
-    'Player1': 5,
-    'Player1Power': 3,
+    'ImageFP2': 0,
+    'ImageFP3': 0,
+    'ImageFP4': 0,
+    'ImageFP5': 0,
+    'ImageFP6': 0,
+    'ImageFP7': 0,
+    'ImageFP8': 0,
+    'ImageFP9': 0,
+    'ImageFP10': 0,
+    'Player1': 1,
+    'Player1Power': 25,
     'Enemy1': 1,
-    'Enemy1Power': 4,
+    'Enemy1Power': 20,
     'Enemy2': 1,
-    'Enemy2Power': 2,
+    'Enemy2Power': 15,
 
 }
 
@@ -46,6 +46,48 @@ ENTITY_HEALTH = {
     'Enemy1Power': 1,
     'Enemy2': 60,
     'Enemy2Power': 1,
+
+}
+
+ENTITY_SCORE = {
+    'ImageFP0': 0,
+    'ImageFP1': 0,
+    'ImageFP2': 0,
+    'ImageFP3': 0,
+    'ImageFP4': 0,
+    'ImageFP5': 0,
+    'ImageFP6': 0,
+    'ImageFP7': 0,
+    'ImageFP8': 0,
+    'ImageFP9': 0,
+    'ImageFP10': 0,
+    'Player1': 0,
+    'Player1Power': 0,
+    'Enemy1': 100,
+    'Enemy1Power': 0,
+    'Enemy2': 125,
+    'Enemy2Power': 0,
+
+}
+
+ENTITY_SPEED = {
+    'ImageFP0': 0,
+    'ImageFP1': 0,
+    'ImageFP2': 1,
+    'ImageFP3': 2,
+    'ImageFP4': 3,
+    'ImageFP5': 4,
+    'ImageFP6': 5,
+    'ImageFP7': 5,
+    'ImageFP8': 5,
+    'ImageFP9': 5,
+    'ImageFP10': 5,
+    'Player1': 5,
+    'Player1Power': 3,
+    'Enemy1': 1,
+    'Enemy1Power': 4,
+    'Enemy2': 1,
+    'Enemy2Power': 2,
 
 }
 
