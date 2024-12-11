@@ -1,9 +1,8 @@
-from code.Menu import Menu
-
 import pygame
 
+from code.Menu import Menu
 from code.Phase import Phase
-from code.const import WIND_WIDTH, WIND_HEIGHT, MENU_OPTION
+from code.const import WIND_WIDTH, WIND_HEIGHT
 
 
 class Game:
@@ -20,14 +19,12 @@ class Game:
             menu_return = menu.run()
 
             if menu_return == 'NEW GAME':
-                phase = Phase(self.window, 'Phase1', menu_return)
-                phase.run()
+                phase = Phase(self.window, 'FP1', menu_return)
+                phase_return = phase.run()
             elif menu_return == 'SCORE':
                 pass
 
             elif menu_return == 'QUIT GAME':
                 pygame.quit()  # Fecha a Janela
                 quit()  # Encerra o pygame
-
-
 

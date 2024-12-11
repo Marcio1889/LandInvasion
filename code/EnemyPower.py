@@ -10,5 +10,6 @@ class EnemyPower(Entity):
     def move(self):
         self.rect.centerx -= ENTITY_SPEED[self.name] # definindo a posição dos tiros
 
-    # def power(self):
-    #     return EnemyPower(name=f'{self.name}Power', position=(self.rect.centerx, self.rect.centery))
+    def power(self):
+        return EnemyPower(name=f'{self.name}Power', position=(self.rect.centerx, self.rect.centery))
+
