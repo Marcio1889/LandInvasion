@@ -1,6 +1,7 @@
 
 
 import pygame
+from pygame.examples.grid import WINDOW_WIDTH
 
 # C
 COLOR_ORANGE = (255, 128, 0)
@@ -115,11 +116,29 @@ PLAYER_KEY_POWER = {
 # S
 SPAWN_TIME = 4000
 
+
 #T
 
 TIMEOUT_STEP = 100
-TIMEOUT_LEVEL = 30000
+TIMEOUT_LEVEL = 20000
 
 # Dimensões da janela
 WIND_WIDTH = 800
 WIND_HEIGHT = 450
+
+# S
+SCORE_POS = {
+    'Title': (WIND_WIDTH / 3, 50),
+    'Title2': (WIND_WIDTH / 4, 50),
+    'EnterName': (WIND_WIDTH / 5, 110),
+    'Label': (WIND_WIDTH / 4, 140),
+    'Name': (WIND_WIDTH / 5, 170),
+    0: (WIND_WIDTH / 4, 200),
+    1: (WIND_WIDTH / 4, 230),
+    2: (WIND_WIDTH / 4, 260),
+    3: (WIND_WIDTH / 4, 290),
+    4: (WIND_WIDTH / 4, 320),
+    5: (WIND_WIDTH / 4, 350),
+    6: (WIND_WIDTH / 4, 380),
+    7: (WIND_WIDTH / 4, 410),
+}

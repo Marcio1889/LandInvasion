@@ -14,7 +14,7 @@ from code.const import COLOR_WHITE, WIND_HEIGHT, EVENT_ENEMY, SPAWN_TIME, COLOR_
 
 class Phase:
 
-    def __init__(self, window, name, game_mode):
+    def __init__(self, window: Surface, name: str, game_mode: str):
         self.timeout = TIMEOUT_LEVEL
         self.window = window
         self.name = name
@@ -27,7 +27,7 @@ class Phase:
         pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIME)  # Geração do evento Inimigo
         pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP)  # Criando evento de encerramento de fase
 
-    def run(self):
+    def run(self,):
         pygame.mixer_music.load(f'./asset/Music_FP.mp3')  # Definindo a Música da fase
         pygame.mixer_music.play(-1)
         clock = pygame.time.Clock()
@@ -61,7 +61,9 @@ class Phase:
                 if event.type == EVENT_TIMEOUT:
                     self.timeout -= TIMEOUT_STEP
                     if self.timeout <= 0:
-                        return True
+                        return True, ent.score  # Retorna o score do jogador
+
+
 
             # Exibe o tempo restante da fase e outros textos
             self.phase_text(18, f'{self.name}  /  Timeout: {self.timeout / 1000 :.1f}s', COLOR_WHITE, (10, 5))
@@ -81,7 +83,7 @@ class Phase:
                     found_player = True
 
             if not found_player:
-                return False  # Retorna False se Player1 não for encontrado (morto)
+                return False, 0  # Retorna False e 0 de score se Player1 não for encontrado (morto)
 
             player1 = next((ent for ent in self.entity_list if isinstance(ent, Player) and ent.name == 'Player1'), None)
             if player1 and player1.health <= 0:
@@ -90,11 +92,14 @@ class Phase:
 
                 pygame.display.flip()
                 pygame.time.wait(1000)  # Espera 1 segundo antes de encerrar a fase
-                return False  # Retorna False para encerrar a fase
+                return False, player1.score  # Retorna o score do player1
 
     def phase_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
-        """Exibe o texto na tela em uma posição específica."""
         text_font: Font = pygame.font.SysFont(name="Arial", size=text_size)  # Fonte alterada para Arial
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: Rect = text_surf.get_rect(left=text_pos[0], top=text_pos[1])
         self.window.blit(source=text_surf, dest=text_rect)
+
+
+
+
