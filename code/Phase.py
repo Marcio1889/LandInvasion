@@ -6,6 +6,7 @@ from pygame import Surface, Rect
 from pygame.font import Font
 
 from code.Enemy import Enemy
+from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
 from code.Player import Player
@@ -14,12 +15,12 @@ from code.const import COLOR_WHITE, WIND_HEIGHT, EVENT_ENEMY, SPAWN_TIME, COLOR_
 
 class Phase:
 
-    def __init__(self, window: Surface, name: str, game_mode: str):
+    def __init__(self, window: Surface, name: str, game_mode: str, player_score: list[int]):
         self.timeout = TIMEOUT_LEVEL
         self.window = window
         self.name = name
         self.game_mode = game_mode
-        self.entity_list = []
+        self.entity_list: list[Entity] = []
 
         # Adiciona as entidades da fase
         self.entity_list.extend(EntityFactory.get_entity('ImageFP'))
@@ -27,8 +28,9 @@ class Phase:
         pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIME)  # Geração do evento Inimigo
         pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP)  # Criando evento de encerramento de fase
 
-    def run(self,):
+    def run(self, player_score: list[int]):
         pygame.mixer_music.load(f'./asset/Music_FP.mp3')  # Definindo a Música da fase
+        pygame.mixer_music.set_volume(0.2)
         pygame.mixer_music.play(-1)
         clock = pygame.time.Clock()
 
@@ -60,8 +62,19 @@ class Phase:
                     self.entity_list.append(EntityFactory.get_entity(choice))
                 if event.type == EVENT_TIMEOUT:
                     self.timeout -= TIMEOUT_STEP
-                    if self.timeout <= 0:
-                        return True, ent.score  # Retorna o score do jogador
+                    if self.timeout == 0:
+                        for ent in self.entity_list:
+                            if isinstance(ent, Player) and ent.name == 'Player1':
+                                player_score[0] = ent.score
+                        return True  # Retorna o score do jogador
+
+                    found_player = False
+                    for ent in self.entity_list:
+                        if isinstance(ent, Player):
+                            found_player = True
+
+                    if not found_player:
+                        return False
 
 
 
@@ -76,29 +89,13 @@ class Phase:
             EntityMediator.verify_collision(entity_list=self.entity_list)
             EntityMediator.verify_health(entity_list=self.entity_list)
 
-            # Verifica a morte do Player1
-            found_player = False
-            for ent in self.entity_list:
-                if isinstance(ent, Player):
-                    found_player = True
-
-            if not found_player:
-                return False, 0  # Retorna False e 0 de score se Player1 não for encontrado (morto)
-
-            player1 = next((ent for ent in self.entity_list if isinstance(ent, Player) and ent.name == 'Player1'), None)
-            if player1 and player1.health <= 0:
-                # Remover o Player1 da lista
-                self.entity_list.remove(player1)
-
-                pygame.display.flip()
-                pygame.time.wait(1000)  # Espera 1 segundo antes de encerrar a fase
-                return False, player1.score  # Retorna o score do player1
 
     def phase_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
         text_font: Font = pygame.font.SysFont(name="Arial", size=text_size)  # Fonte alterada para Arial
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: Rect = text_surf.get_rect(left=text_pos[0], top=text_pos[1])
         self.window.blit(source=text_surf, dest=text_rect)
+
 
 
 

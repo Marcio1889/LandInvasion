@@ -15,17 +15,15 @@ class Game:
 
 
     def run(self):
-
-
         while True:# Mantendo a Janela aberta
-            player_score = [0, 0]
             score = Score(self.window)
             menu = Menu(self.window)
             menu_return = menu.run()
 
             if menu_return == 'NEW GAME':
-                phase = Phase(self.window, 'FP1', menu_return)
-                phase_return = phase.run()
+                player_score = [0]
+                phase = Phase(self.window, 'FP1', menu_return, player_score)
+                phase_return = phase.run(player_score)
                 if phase_return:
                     score.save(menu_return, player_score)
 
